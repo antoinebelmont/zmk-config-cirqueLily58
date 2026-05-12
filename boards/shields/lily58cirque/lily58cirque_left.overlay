@@ -32,9 +32,31 @@
         //x-invert;
         //scroll;
     };
+
+    oled: ssd1306@3c {
+        compatible = "solomon,ssd1306fb";
+        reg = <0x3c>;
+        label = "SSD1306";
+        width = <128>;
+        height = <32>;
+        segment-offset = <0>;
+        page-offset = <0>;
+        display-offset = <0>;
+        multiplex-ratio = <31>;
+        segment-remap;
+        com-invdir;
+        prechargep = <0x22>;
+        status = "okay";
+    };
 };
 
 &glidepoint_split {
     device = <&glidepoint_left>;
     //input-processors = <&zip_xy_to_scroll_mapper>, <&zip_scroll_scaler 1 10>;
+};
+
+/ {
+    chosen {
+        zmk,display = &oled;
+    };
 };
